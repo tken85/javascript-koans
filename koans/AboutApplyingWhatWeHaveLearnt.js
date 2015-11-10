@@ -40,8 +40,14 @@ describe("About Applying What We Have Learnt", function() {
       var productsICanEat = [];
 
       /* solve using filter() & all() / any() */
-      
-      expect(productsICanEat.length).toBe(0);
+      productsICanEat = _(products).chain().filter(function(el){
+        return el.containsNuts === false;
+      }).filter(function(el){
+          return _.all(el.ingredients, function(ingredient){
+            return (ingredient != "mushrooms");
+          });
+      }).value();
+      expect(productsICanEat.length).toBe(1);
   });
 
   /*********************************************************************************/
